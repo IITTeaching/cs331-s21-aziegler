@@ -22,7 +22,16 @@ def captured_output():
 
 # implement this function
 def is_perfect(n):
-    pass
+    factors = []
+    for i in range(1,n):
+        if(n%i == 0):
+            factors.append(i)
+    count = 0
+    for i in factors:
+        count += i
+    if(count == n):
+        return True
+    return False
 
 # (3 points)
 def test1():
@@ -40,7 +49,15 @@ def test1():
 
 # implement this function
 def multiples_of_3_and_5(n):
-    pass
+    i = 0
+    count = 0
+    while(i<n):
+        if(i%3 == 0):
+            count += i
+        elif(i%5 == 0):
+            count += i
+        i+=1
+    return count
 
 # (3 points)
 def test2():
@@ -53,7 +70,14 @@ def test2():
 # EXERCISE 3
 #################################################################################
 def integer_right_triangles(p):
-    pass
+    sides = 0
+    if(p%2 != 0):
+      return 0;
+    for i1 in range(1,p//2):
+        for i2 in range(1,(p-i1)//2+1):
+            if(i1**2+i2**2 == (p-i1-i2)**2):
+                sides+=1
+    return sides//2
 
 def test3():
     tc = unittest.TestCase()
@@ -67,7 +91,34 @@ def test3():
 
 # implement this function
 def gen_pattern(chars):
-    pass
+    length = len(chars)*4 - 3
+    height = len(chars)*2-1
+    letters = 1 #unique letters
+    middle = height // 2 +1
+    grid = []
+    for i in range(height//2+1):
+        row = ""
+        dotside = (length - letters*4 + 3)//2
+        if(dotside>0):
+            row += dotside * "."
+        for i in range(1,letters+1):
+            row += (chars[i*-1])
+            row += "."
+        newrow = row[:-1]
+        for i in range(len(newrow)-2,-1,-1):
+            newrow +=row[i]
+        grid.append(newrow)
+        letters +=1
+    newgrid = grid
+    for i in range(len(newgrid)-2,-1,-1):
+        newgrid.append(grid[i])
+    #return newgrid
+    result = ""
+    for i in newgrid:
+      result += i
+      result += "\n"
+    return result
+
 
 def test4():
     tc = unittest.TestCase()
