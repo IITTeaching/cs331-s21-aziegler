@@ -112,12 +112,11 @@ def gen_pattern(chars):
     newgrid = grid
     for i in range(len(newgrid)-2,-1,-1):
         newgrid.append(grid[i])
-    #return newgrid
     result = ""
     for i in newgrid:
       result += i
       result += "\n"
-    return result
+    print(result)
 
 
 def test4():
