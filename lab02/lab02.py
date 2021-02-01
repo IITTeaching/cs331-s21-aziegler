@@ -33,8 +33,21 @@ ROMEO_SOLILOQUY = """
 ################################################################################
 # Implement this function
 def compute_ngrams(toks, n=2):
+  List = []
+  dictionary = {}
+  while(len(toks)>=n):
+    List.append(tuple(toks[0:n]))
+    toks = toks[1:]
+  for j in range(len(List)):
+    i=List[j]
+    key = i[0]
+    value = i[1:]
+    if key in dictionary:
+      dictionary[key].append(value)
+    else:
+      dictionary[key] = [value]
     """Returns an n-gram dictionary based on the provided list of tokens."""
-    pass
+  return dictionary
 
 def test1():
     test1_1()
@@ -93,7 +106,21 @@ def test1_2():
 ################################################################################
 # Implement this function
 def gen_passage(ngram_dict, length=100):
-    pass
+    string = []
+    first = random.choice(sorted(ngram_dict.keys()))
+    string.append(first)
+    while(len(string) < length):
+      if(not string[-1] in ngram_dict):
+        temp =  " ".join((random.choice(sorted(ngram_dict.keys()))))
+        string.append(temp)
+      else:
+        temp =  " ".join(random.choice(ngram_dict[string[-1]]))
+        string.append(temp)
+      print(temp)
+    if(len(string) > length):
+      string = string[0:length]
+    string = " ".join(string)
+    return string
 
 # 50 Points
 def test2():
