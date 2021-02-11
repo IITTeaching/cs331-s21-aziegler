@@ -216,13 +216,17 @@ class SuffixArray():
         """
         Returns all the positions of searchstr in the documented indexed by the suffix array.
         """
-        pass
+        L = len(searchstr)
+        compare = lambda x,y : 0 if self.suffixs[x][0:L] == searchstr else (-1 if self.suffixs[x][0:L] < searchstr else 1)
+        return [mybinsearch(self.nums[0:(len(self.nums)-L)+1],searchstr,compare)]
 
     def contains(self, searchstr: str):
         """
         Returns true of searchstr is coontained in document.
         """
-        pass
+        L = len(searchstr)
+        compare = lambda x,y : 0 if self.suffixs[x][0:L] == searchstr else (-1 if self.suffixs[x][0:L] < searchstr else 1)
+        return (-1 != mybinsearch(self.nums[0:(len(self.nums)-L)+1],searchstr,compare))
 
 # 40 Points
 def test3():
